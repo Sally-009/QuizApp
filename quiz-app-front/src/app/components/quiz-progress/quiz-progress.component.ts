@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './quiz-progress.component.css'
 })
 export class QuizProgressComponent {
-
+    // progress of the quiz
+    // ** modify it to data-bind the progress from the parent component later
+    currentQuestionNumber = 1;
+    totalQuestionNumber = 10;
 }

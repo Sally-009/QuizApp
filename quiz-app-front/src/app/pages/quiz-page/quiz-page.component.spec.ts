@@ -11,7 +11,7 @@ describe('QuizPageComponent', () => {
       imports: [QuizPageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(QuizPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

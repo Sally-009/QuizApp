@@ -5,8 +5,10 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './question.component.html',
-  styleUrl: './question.component.css'
+  styleUrl: './question.component.css',
 })
 export class QuestionComponent {
-
+  // question text
+  // ** modify it to data-bind the question from the parent component later
+  questionText = 'Question here: What is the capital of France?';
 }
