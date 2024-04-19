@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+// import cors
+var cors = require('cors');
+
 // import SQL connection
 const mysql = require("mysql2");
 
