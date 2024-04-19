@@ -1,9 +1,30 @@
 var express = require('express');
 var router = express.Router();
 
+// import SQL connection
+const mysql = require("mysql2");
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+
+  // connect to the database
+  const connection = mysql.createConnection({
+    host: '127.0.0.1',  // hostname for the database
+    user: 'root',        // username
+    password: 'skojima', // password
+    database: 'QuizApp', // database name
+  });
+
+  /// query users table
+  connection.query(
+    'SELECT * FROM users',
+    function(err, rows, fields) {
+      if (!err)
+      console.log("Successfully queried users table!");
+      res.send(rows); // send the result (JSON format)
+    }
+  );
+
 });
 
 module.exports = router;
