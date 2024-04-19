@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
     'SELECT * FROM users',
     function(err, rows, fields) {
       if (!err)
-      console.log("Successfully queried users table!");
+      console.log("\nSuccessfully queried users table!\n");
       res.send(rows); // send the result (JSON format)
     }
   );
