@@ -1,0 +1,20 @@
+<div class="user-list">
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Is Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.UserID }}</td>
+        <td>{{ user.Email }}</td>
+        <td>{{ user.Password }}</td>
+        <td>{{ user.IsAdmin }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
