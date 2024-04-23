@@ -1,0 +1,17 @@
+<div class="quiz-list">
+  <h2>Quiz List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>QuizID</th>
+        <th>QuizName</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quiz of quizzes">
+        <td>{{ quiz.QuizID }}</td>
+        <td>{{ quiz.QuizName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

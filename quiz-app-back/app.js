@@ -5,9 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");  // added cors to allow cross-origin requests
 
-// Routes
+// Routes ... *add line to Router endpoints as well
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var quizzesRouter = require('./routes/quizzes');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routers endpoints
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/quizzes', quizzesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
