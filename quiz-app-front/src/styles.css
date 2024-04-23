@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* center horizontally for all elements */
+/* make a margin to look nicer */
 body {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  margin: 20px 10%;
 }
