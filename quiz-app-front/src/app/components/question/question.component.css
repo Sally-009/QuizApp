@@ -1,0 +1,5 @@
+/* Make Image Size small */
+img {
+  width: 100px;
+  height: 100px;
+}

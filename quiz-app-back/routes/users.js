@@ -28,3 +28,9 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+
+/* 
+    how to get a parameter from the URL
+    todo-list-server >> index.js
+*/

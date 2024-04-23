@@ -14,7 +14,7 @@ router.get("/", function (req, res, next) {
     database: "QuizApp", // database name
   });
 
-  /// query users table
+  /// query quizzes table
   connection.query("SELECT * FROM quizsets", function (err, rows, fields) {
     if (!err) console.log("\nSuccessfully queried users table!\n");
     res.send(rows); // send the result (JSON format)

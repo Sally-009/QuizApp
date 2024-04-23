@@ -1,3 +1,8 @@
 <div class="questionText">
   <p>{{ questionText }}</p>
+  <!-- Testing purpose -->
+  <div *ngFor="let question of questions">
+    <p>{{ question.QuestionText }}</p>
+    <img src="{{question.ImageURL}}" alt="Image of Question">
+  </div>
 </div>
