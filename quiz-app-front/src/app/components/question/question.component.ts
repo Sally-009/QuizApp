@@ -18,11 +18,12 @@ export class QuestionComponent {
   constructor(private fetchDataService: FetchDataService) {}
 
   // get questions data
+  quizID : number = 1;
   questions : any[] = [];
 
   // fetch the questions from the service ... *ID=1 for now
   ngOnInit() {
-    this.fetchDataService.getQuestions(1).subscribe(
+    this.fetchDataService.getQuestions(this.quizID).subscribe(
       (data: any[]) => {
         this.questions = data;
       },
