@@ -13,3 +13,11 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
   ],
 };
+
+/*
+  Modified appConfig to include HttpClientModule
+  this will allow the app to use the HttpClient service.
+
+  Also added importProvidersFrom to import providers from HttpClientModule
+  and provideClientHydration to provide client hydration
+*/
