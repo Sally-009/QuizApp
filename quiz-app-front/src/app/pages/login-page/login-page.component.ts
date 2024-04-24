@@ -26,13 +26,11 @@ import { RegisterButtonComponent } from '../../components/register-button/regist
 export class LoginPageComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
+  email: string = '';
+  password: string = '';
+
   // ** Make it a service method later
-  // For debugging purposes, hardcoding the email and password
-  email: string = 'skojima@atu.edu';
-  password: string = 'skojima';
-
   submitLogin(email: string, password: string) {
-
     // Hash the password
     const hashedPassword = SHA256(password).toString();
 
