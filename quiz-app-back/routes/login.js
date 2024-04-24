@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 
 // import SQL connection
 const mysql = require("mysql2");
 
 router.post("/", (req, res) => {
   const { email, password } = req.body; // Get email and password from request body
+
+    console.log("POST Data:", req.body);
 
   // show it in the console
     console.log("Email:", email);

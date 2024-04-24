@@ -26,8 +26,9 @@ export class LoginPageComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   // ** Make it a service method later
-  email: string = '';
-  password: string = '';
+  // For debugging purposes, hardcoding the email and password
+  email: string = 'skojima@atu.edu';
+  password: string = 'skojima';
 
   submitLogin() {
     const userData = { email: this.email, password: this.password };
