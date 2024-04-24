@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
 
   // Query the database to retrieve user information
   connection.query(
-    "SELECT * FROM users WHERE email = ?",
+    "SELECT Email, Password FROM users WHERE email = ?",
     [email],
     (err, results) => {
       if (err) {

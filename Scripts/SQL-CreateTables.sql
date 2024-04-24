@@ -234,3 +234,5 @@ SELECT * FROM QuizContent;
 SELECT * FROM QuizContent WHERE quizID=1;
 SELECT * FROM QuizContent WHERE quizID=2;
 SELECT * FROM QuizContent WHERE quizID=3;
+
+show databases;
