@@ -31,10 +31,9 @@ router.get("/:id", function (req, res, next) {
       }
     }
   );
-});
 
-router.post("/", function (req, res, next) {
-  // Implement logic to handle POST request (if needed)
+  // close the connection
+  connection.end();
 });
 
 module.exports = router;

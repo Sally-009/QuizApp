@@ -4,15 +4,15 @@
   <form>
     <div class="form-group">
 
-      <app-email-input></app-email-input>
+      <app-email-input [(ngModel)]="email" name="email"></app-email-input>
       <br>
-      <app-pswd-input></app-pswd-input>
+      <app-pswd-input [(ngModel)]="password" name="password"></app-pswd-input>
 
     </div>
 
     <br>
 
-    <app-login-button></app-login-button>
+    <app-login-button (click)="submitLogin()"></app-login-button>
   </form>
 
   <br>

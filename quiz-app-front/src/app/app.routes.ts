@@ -8,9 +8,10 @@ import { QuizPageComponent } from './pages/quiz-page/quiz-page.component';
 import { ResultPageComponent } from './pages/result-page/result-page.component';
 
 export const routes: Routes = [
+  // { path: '', redirectTo: '/login', pathMatch: 'full' }, // Top page
   { path: 'login', component: LoginPageComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'quiz-select', component: QuizSelectPageComponent },
-  { path: 'quiz', component: QuizPageComponent },
+  { path: 'quiz/:id', component: QuizPageComponent },
   { path: 'result', component: ResultPageComponent },
 ];

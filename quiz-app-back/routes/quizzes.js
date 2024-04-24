@@ -19,6 +19,9 @@ router.get("/", function (req, res, next) {
     if (!err) console.log("\nSuccessfully queried users table!\n");
     res.send(rows); // send the result (JSON format)
   });
+
+  // close the connection
+  connection.end();
 });
 
 module.exports = router;

@@ -25,6 +25,9 @@ router.get('/', function(req, res, next) {
     }
   );
 
+  // close the connection
+  connection.end();
+
 });
 
 module.exports = router;
