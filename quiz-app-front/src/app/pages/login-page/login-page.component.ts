@@ -8,6 +8,7 @@ import { EmailInputComponent } from '../../components/email-input/email-input.co
 import { PswdInputComponent } from '../../components/pswd-input/pswd-input.component';
 import { LoginButtonComponent } from '../../components/login-button/login-button.component';
 import { RegisterButtonComponent } from '../../components/register-button/register-button.component';
+import e from 'express';
 
 @Component({
   selector: 'app-login-page',
@@ -30,8 +31,8 @@ export class LoginPageComponent {
   email: string = 'skojima@atu.edu';
   password: string = 'skojima';
 
-  submitLogin() {
-    const userData = { email: this.email, password: this.password };
+  submitLogin(email: string, password: string) {
+    const userData = {email, password};
     this.http.post<any>('http://localhost:3000/login', userData).subscribe(
       (response) => {
         console.log('Login response:', response);
