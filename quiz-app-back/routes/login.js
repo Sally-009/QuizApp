@@ -1,18 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
 
 // import SQL connection
 const mysql = require("mysql2");
 
 router.post("/", (req, res) => {
-  const { email, password } = req.body; // Get email and password from request body
+  const { email, hashedPassword } = req.body; // Get email and hashedPassword from request body
 
-    console.log("POST Data:", req.body);
-
-  // show it in the console
-    console.log("Email:", email);
-    console.log("Password:", password);
+  console.log("POST Data:", req.body);
+  console.log("Email:", email);
+  console.log("Hashed Password:", hashedPassword);
 
   // Connect to the database
   const connection = mysql.createConnection({
@@ -32,6 +29,9 @@ router.post("/", (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
       }
 
+      // show the result
+      console.log("Query results:", results);
+
       // Check if user exists
       if (results.length === 0) {
         return res.status(400).json({ message: "User not found" });
@@ -39,19 +39,13 @@ router.post("/", (req, res) => {
 
       // User found, compare passwords
       const user = results[0];
-      bcrypt.compare(password, user.password, (bcryptErr, isMatch) => {
-        if (bcryptErr) {
-          console.error("Error comparing passwords:", bcryptErr);
-          return res.status(500).json({ message: "Internal server error" });
-        }
+      if (hashedPassword !== user.Password) {
+        return res.status(400).json({ message: "Incorrect password" });
+      }
 
-        if (!isMatch) {
-          return res.status(400).json({ message: "Incorrect password" });
-        }
-
-        // Passwords match, authentication successful
-        res.json({ message: "Login successful", user });
-      });
+      // Passwords match, authentication successful
+      console.log("Login successful");
+      res.json({ message: "Login successful", user });
     }
   );
 

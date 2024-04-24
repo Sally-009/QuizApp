@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SHA256 } from 'crypto-js';
 
 // components
 import { EmailInputComponent } from '../../components/email-input/email-input.component';
 import { PswdInputComponent } from '../../components/pswd-input/pswd-input.component';
 import { LoginButtonComponent } from '../../components/login-button/login-button.component';
 import { RegisterButtonComponent } from '../../components/register-button/register-button.component';
-import e from 'express';
 
 @Component({
   selector: 'app-login-page',
@@ -32,7 +32,11 @@ export class LoginPageComponent {
   password: string = 'skojima';
 
   submitLogin(email: string, password: string) {
-    const userData = {email, password};
+
+    // Hash the password
+    const hashedPassword = SHA256(password).toString();
+
+    const userData = { email, hashedPassword };
     this.http.post<any>('http://localhost:3000/login', userData).subscribe(
       (response) => {
         console.log('Login response:', response);
