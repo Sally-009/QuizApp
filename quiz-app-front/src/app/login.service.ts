@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { SHA256 } from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  /* Get user list and compare to the input to authorize. */
+  login(email: string, password: string){
+
+    // Hash the password
+    const hashedPassword = SHA256(password).toString();
+    // set user data
+    const userData = { email, hashedPassword };
+
+    // send a post request to the server
+    return this.http.post<any>('http://localhost:3000/login', userData);
+  }
 
 }

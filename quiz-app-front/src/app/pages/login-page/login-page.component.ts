@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { SHA256 } from 'crypto-js';
+
+// services
+import { LoginService } from '../../login.service';
 
 // components
 import { RegisterButtonComponent } from '../../components/register-button/register-button.component';
-import e from 'express';
 
 @Component({
   selector: 'app-login-page',
@@ -16,24 +16,17 @@ import e from 'express';
   styleUrl: './login-page.component.css',
 })
 export class LoginPageComponent {
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private router: Router, private loginService: LoginService,) {}
 
   // initialize variables
   email: string = '';
   password: string = '';
-
-  // error message
   errorMsg: string = '';
 
-  // ** Make it a service method later
   submitLogin() {
-    // set variable and Hash the password ... change this to component later
-    const email = this.email;
-    const hashedPassword = SHA256(this.password).toString();
 
-    const userData = { email, hashedPassword };
-
-    this.http.post<any>('http://localhost:3000/login', userData).subscribe(
+    this.loginService.login(this.email, this.password).subscribe(
       (response) => {
         console.log('Login response:', response);
         if (response) {
