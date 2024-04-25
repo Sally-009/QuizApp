@@ -4,15 +4,17 @@
   <form>
     <div class="form-group">
 
-      <app-email-input [(ngModel)]="email" name="email"></app-email-input>
+      <label for="email">E-mail: </label>
+      <input type="email" id="email" name="email" [(ngModel)]="email"/>
       <br>
-      <app-pswd-input [(ngModel)]="password" name="password"></app-pswd-input>
+      <label for="password">Password: </label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" />
 
     </div>
 
     <br>
 
-    <app-login-button (click)="submitLogin(email, password)"></app-login-button>
+    <button type="submit" class="btn btn-primary" (click)="submitLogin()">Login</button>
   </form>
 
   <br>

@@ -5,18 +5,12 @@ import { Router } from '@angular/router';
 import { SHA256 } from 'crypto-js';
 
 // components
-import { EmailInputComponent } from '../../components/email-input/email-input.component';
-import { PswdInputComponent } from '../../components/pswd-input/pswd-input.component';
-import { LoginButtonComponent } from '../../components/login-button/login-button.component';
 import { RegisterButtonComponent } from '../../components/register-button/register-button.component';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
   imports: [
-    EmailInputComponent,
-    PswdInputComponent,
-    LoginButtonComponent,
     RegisterButtonComponent,
     FormsModule,
   ],
@@ -26,13 +20,15 @@ import { RegisterButtonComponent } from '../../components/register-button/regist
 export class LoginPageComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
+  // initialize variables
   email: string = '';
   password: string = '';
 
   // ** Make it a service method later
-  submitLogin(email: string, password: string) {
-    // Hash the password
-    const hashedPassword = SHA256(password).toString();
+  submitLogin() {
+    // set variable and Hash the password ... change this to component later
+    const email = this.email;
+    const hashedPassword = SHA256(this.password).toString();
 
     const userData = { email, hashedPassword };
     this.http.post<any>('http://localhost:3000/login', userData).subscribe(
