@@ -12,6 +12,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'quiz-select', component: QuizSelectPageComponent },
-  { path: 'quiz/:id', component: QuizPageComponent },
+  { path: 'quiz', component: QuizPageComponent },
   { path: 'result', component: ResultPageComponent },
 ];

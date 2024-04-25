@@ -34,9 +34,10 @@ export class LoginPageComponent {
     this.http.post<any>('http://localhost:3000/login', userData).subscribe(
       (response) => {
         console.log('Login response:', response);
-        if (response.success) {
+        if (response) {
+          // Navigate to the quiz select page
           console.log('Login successful');
-          this.router.navigate(['/quiz-select']);
+          this.router.navigateByUrl('/quiz-select');
         } else {
           console.log('Login failed:', response.error);
           // Show error message to user
