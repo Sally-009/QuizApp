@@ -1,8 +1,11 @@
 <h1>- Quiz Page -</h1>
 <br>
-<app-quiz-title></app-quiz-title>
-<app-quiz-progress></app-quiz-progress>
+<h2>{{ quizTitle }}</h2>
+<p>{{currentQuestionNumber}} / {{totalQuestionNumber}}</p>
 <app-question></app-question>
 <app-choices></app-choices>
 <br>
-<app-submit-button></app-submit-button>
+  <button type="submit">Submit</button>
+
+
+<!-- Remove components and make it one component except for choices -->

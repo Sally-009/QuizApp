@@ -27,4 +27,18 @@ export class QuizListComponent {
       }
     );
   }
+
+  // send the quiz id to the server and navigate to the quiz page
+  startQuiz(quizId: number) {
+    // **DEBUG show quiz content in console
+    this.fetchDataService.getQuestions(quizId).subscribe(
+      (data: any) => {
+        console.log('Quiz data: ', data);
+      },
+      (error) => {
+        console.error('Error fetching questions: ', error);
+      }
+    );
+  }
+
 }

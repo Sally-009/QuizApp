@@ -1,5 +1,5 @@
 <div class="quiz-list">
-  <table class="table table-bordered">
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>QuizID</th>
@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let quiz of quizzes">
+      <tr *ngFor="let quiz of quizzes" (click)="startQuiz(quiz.QuizID)">
         <td>{{ quiz.QuizID }}</td>
         <td>{{ quiz.QuizName }}</td>
       </tr>

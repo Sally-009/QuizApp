@@ -1,20 +1,29 @@
 import { Component } from '@angular/core';
 
 // import components
-import { QuizTitleComponent } from '../../components/quiz-title/quiz-title.component';
-import { QuizProgressComponent } from '../../components/quiz-progress/quiz-progress.component';
 import { QuestionComponent } from '../../components/question/question.component';
 import { ChoicesComponent } from '../../components/choices/choices.component';
-import { SubmitButtonComponent } from '../../components/submit-button/submit-button.component';
 
 @Component({
   selector: 'app-quiz-page',
   standalone: true,
-  imports: [QuizTitleComponent, QuizProgressComponent, QuestionComponent, ChoicesComponent, SubmitButtonComponent],
+  imports: [QuestionComponent, ChoicesComponent],
   templateUrl: './quiz-page.component.html',
-  styleUrl: './quiz-page.component.css'
+  styleUrl: './quiz-page.component.css',
 })
 export class QuizPageComponent {
+  // Variables for quiz content
+  quizTitle: string = '';
+  quizQuestions: string[] = [];
+  quizChoices: string[] = [];
+  isCorrects: boolean[] = [];
 
+  // variables for user answer and audit
+  today: Date = new Date();
+  score: number = 0;
+  userAnswer: string = '';
 
+  // variables for quiz progress
+  currentQuestionNumber: number = 0;
+  totalQuestionNumber: number = 0;
 }

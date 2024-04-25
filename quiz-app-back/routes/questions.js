@@ -4,7 +4,7 @@ var router = express.Router();
 // import SQL connection
 const mysql = require("mysql2");
 
-router.post("/", function (req, res){
+router.get("/:id", function (req, res){
   // connect to the database
     const connection = mysql.createConnection({
       host: "127.0.0.1", // hostname for the database
@@ -14,9 +14,9 @@ router.post("/", function (req, res){
     });
 
     // get the parameters from the request
-    const quizID = req.body;
+    const quizID = parseInt(req.params.id);
 
-    console.log("POST Data:", req.body);
+    console.log("QuizID:", quizID);
 
     // query questions table
     connection.query(
@@ -36,3 +36,5 @@ router.post("/", function (req, res){
     // close the connection
     connection.end();
 });
+
+module.exports = router;
