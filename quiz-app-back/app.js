@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var quizzesRouter = require('./routes/quizzes');
 var questionsRouter = require('./routes/questions');
-var loginRouter = require('./routes/login');  
+var loginRouter = require('./routes/login');
 
 var app = express();
 
