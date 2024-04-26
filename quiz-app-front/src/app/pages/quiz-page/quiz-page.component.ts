@@ -15,8 +15,9 @@ export class QuizPageComponent {
   static questions: any;
 
   // Variables for quiz content
+  questionIDs: number[] = [];
   quizQuestions: string[] = [];
-  questionImages: string[] = []; // Add http://localhost:4200/public/ to the beginning of the URL
+  questionImages: string[] = []; // Add http://localhost:3000/ to the beginning of the URL
   quizChoices: string[][] = [];
 
   // variables for user answer and audit
@@ -29,9 +30,10 @@ export class QuizPageComponent {
   totalQuestionNumber: number = 0;
 
   ngOnInit() {
-    console.log('Today:', this.today);
-
     // Initialize variables
+    this.questionIDs = QuizPageComponent.questions.map(
+      (question: { QuestionID: any; }) => question.QuestionID
+    );
     this.quizQuestions = QuizPageComponent.questions.map(
       (question: { QuestionText: any; }) => question.QuestionText
     );
@@ -41,7 +43,10 @@ export class QuizPageComponent {
 
     this.totalQuestionNumber = this.quizQuestions.length;
 
-    console.log('Quiz questions:', this.quizQuestions);
-    console.log('Question images:', this.questionImages);
+    console.log('Question IDs:', this.questionIDs);
+    console.log('Questions:', this.quizQuestions);
+    console.log('Images:', this.questionImages);
+    console.log('Total Questions:', this.totalQuestionNumber);
+    console.log('Today:', this.today);
   }
 }

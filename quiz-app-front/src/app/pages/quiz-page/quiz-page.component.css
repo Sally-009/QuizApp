@@ -1,5 +1,6 @@
 /* Set image size */
 img {
+  margin: 20px 0;
   width: 500px;
   height: auto;
 }

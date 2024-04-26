@@ -10,6 +10,7 @@ export class FetchDataService {
   private userURL = 'http://localhost:3000/users';
   private quizURL = 'http://localhost:3000/quizzes';
   private questionsURL = 'http://localhost:3000/questions';
+  private answersURL = 'http://localhost:3000/choices';
 
   // constructor
   constructor(private http: HttpClient) {}
@@ -27,5 +28,9 @@ export class FetchDataService {
   // fetch quiz data by id
   getQuestions(id: number): Observable<any> {
     return this.http.get(`${this.questionsURL}/${id}`);
+  }
+
+  getAnswers(id: number): Observable<any> {
+    return this.http.get(`${this.answersURL}/${id}`);
   }
 }

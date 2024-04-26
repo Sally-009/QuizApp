@@ -1,10 +1,9 @@
 <h1>- Quiz Page -</h1>
 <br>
 <p>{{currentQuestionNumber+1}} / {{totalQuestionNumber}}</p>
-<br>
-<img src="http://localhost:3000/{{questionImages}}" alt="Image of the question">
+<img src="http://localhost:3000/{{questionImages[currentQuestionNumber]}}" alt="Image of the question">
 <p>{{ quizQuestions[currentQuestionNumber] }}</p>
-<app-choices></app-choices>
+<app-choices [questionNum]="questionIDs[currentQuestionNumber]"></app-choices>
 <br>
   <button type="submit">Submit</button>
 
