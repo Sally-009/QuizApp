@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { FetchDataService } from '../../fetch-data.service';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-choices',
