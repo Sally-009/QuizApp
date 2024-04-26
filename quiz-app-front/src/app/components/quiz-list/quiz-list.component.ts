@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
 import { FetchDataService } from '../../fetch-data.service';
 import { CommonModule, NgFor } from '@angular/common';
+import { Router } from '@angular/router';
+
+// component
+import { QuizPageComponent } from '../../pages/quiz-page/quiz-page.component';
 
 @Component({
   selector: 'app-quiz-list',
   standalone: true,
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, NgFor, QuizPageComponent],
   templateUrl: './quiz-list.component.html',
   styleUrl: './quiz-list.component.css',
 })
 export class QuizListComponent {
   // constructor to inject the FetchDataService
-  constructor(private fetchDataService: FetchDataService) {}
+  constructor(
+    private fetchDataService: FetchDataService,
+    private router: Router
+  ) {}
 
   // define a variable to store the quizzes
   quizzes: any[] = [];
@@ -30,15 +37,15 @@ export class QuizListComponent {
 
   // send the quiz id to the server and navigate to the quiz page
   startQuiz(quizId: number) {
-    // **DEBUG show quiz content in console
     this.fetchDataService.getQuestions(quizId).subscribe(
       (data: any) => {
-        console.log('Quiz data: ', data);
+        QuizPageComponent.questions = data; // store the questions in the static variable
+        // navigate to the quiz page
+        this.router.navigateByUrl('/quiz');
       },
       (error) => {
         console.error('Error fetching questions: ', error);
       }
     );
   }
-
 }

@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
 
 // import components
-import { QuestionComponent } from '../../components/question/question.component';
 import { ChoicesComponent } from '../../components/choices/choices.component';
 
 @Component({
   selector: 'app-quiz-page',
   standalone: true,
-  imports: [QuestionComponent, ChoicesComponent],
+  imports: [ChoicesComponent],
   templateUrl: './quiz-page.component.html',
   styleUrl: './quiz-page.component.css',
 })
 export class QuizPageComponent {
+  // static variable to store question data (from quiz-list.component.ts)
+  static questions: any;
+
   // Variables for quiz content
-  quizTitle: string = '';
   quizQuestions: string[] = [];
-  quizChoices: string[] = [];
-  isCorrects: boolean[] = [];
+  questionImages: string[] = []; // Add http://localhost:4200/public/ to the beginning of the URL
+  quizChoices: string[][] = [];
 
   // variables for user answer and audit
   today: Date = new Date();
@@ -26,4 +27,21 @@ export class QuizPageComponent {
   // variables for quiz progress
   currentQuestionNumber: number = 0;
   totalQuestionNumber: number = 0;
+
+  ngOnInit() {
+    console.log('Today:', this.today);
+
+    // Initialize variables
+    this.quizQuestions = QuizPageComponent.questions.map(
+      (question: { QuestionText: any; }) => question.QuestionText
+    );
+    this.questionImages = QuizPageComponent.questions.map(
+      (question: { QuestionImageURL: any; }) => question.QuestionImageURL
+    );
+
+    this.totalQuestionNumber = this.quizQuestions.length;
+
+    console.log('Quiz questions:', this.quizQuestions);
+    console.log('Question images:', this.questionImages);
+  }
 }

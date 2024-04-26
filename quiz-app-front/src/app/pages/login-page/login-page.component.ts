@@ -17,7 +17,10 @@ import { RegisterButtonComponent } from '../../components/register-button/regist
 })
 export class LoginPageComponent {
 
-  constructor(private router: Router, private loginService: LoginService,) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+  ) {}
 
   // initialize variables
   email: string = '';

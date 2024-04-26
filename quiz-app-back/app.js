@@ -23,7 +23,7 @@ app.use(cors());  // added cors to allow cross-origin requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));  // Access to public folder
 
 // Routers endpoints
 app.use('/', indexRouter);

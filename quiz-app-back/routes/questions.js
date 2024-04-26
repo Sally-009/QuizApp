@@ -20,7 +20,7 @@ router.get("/:id", function (req, res){
 
     // query questions table
     connection.query(
-      "SELECT questionID, QuestionText, QuestionImageURL FROM questions WHERE quizid = ?",
+      "SELECT QuestionID, QuestionText, QuestionImageURL FROM Questions WHERE quizid = ?",
       [quizID],
       function (err, rows, fields) {
         if (err) {
