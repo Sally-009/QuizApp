@@ -1,6 +1,6 @@
 <div class="choice">
-  <div *ngFor="let choice of choices">
-    <input type="radio" name="choice" value="{{choice}}">
-    <label>{{choice}}</label>
+  <div class="component" *ngFor="let choice of choices">
+    <input type="radio" class="btn-check" name="choice" value="{{choice}}">
+    <label class="btn btn-outline-primary">{{choice}}</label>
   </div>
 </div>
