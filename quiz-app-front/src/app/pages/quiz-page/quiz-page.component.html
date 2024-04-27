@@ -1,8 +1,15 @@
 <h1>- Quiz Page -</h1>
 <br>
 <p>{{currentQuestionNumber+1}} / {{totalQuestionNumber}}</p>
+<!-- Question Sentence -->
 <img src="http://localhost:3000/{{questionImages[currentQuestionNumber]}}" alt="Image of the question">
 <p>{{ quizQuestions[currentQuestionNumber] }}</p>
-<app-choices [questionNum]="questionIDs[currentQuestionNumber]"></app-choices>
+
+<!-- Choices -->
+<div class="choice-component" *ngFor="let choice of quizChoices">
+  <input type="radio" name="choice" [value]="choice" [(ngModel)]="userChoice">
+  <label for="choice">{{choice}}</label>
+</div>
+
 <br>
-<button type="submit">Submit</button>
+<button type="submit" (click)="onClickSubmit()">Submit</button>

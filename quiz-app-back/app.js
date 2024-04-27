@@ -12,6 +12,7 @@ var quizzesRouter = require('./routes/quizzes');
 var questionsRouter = require('./routes/questions');
 var choicesRouter = require('./routes/choices');
 var loginRouter = require('./routes/login');
+var validateRouter = require('./routes/validate');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/quizzes', quizzesRouter);
 app.use('/questions', questionsRouter);
 app.use('/choices', choicesRouter);
 app.use("/login", loginRouter); 
+app.use("/validate", validateRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
