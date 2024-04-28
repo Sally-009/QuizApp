@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
 
   // Query the database to retrieve user information
   connection.query(
-    "SELECT UserID, Email, Password FROM users WHERE email = ?",
+    "SELECT UserID, Email, Password, IsAdmin FROM users WHERE email = ?",
     [email],
     (err, results) => {
       if (err) {
@@ -60,10 +60,10 @@ router.post("/", (req, res) => {
           if (hashedPassword !== user.Password) {
             return res.status(400).json({ message: "Incorrect password" });
           }
-
+        
           // Passwords match, authentication successful
           console.log("Login successful");
-          res.json({ message: "Login successful", user });
+          res.json({ message: "Login successful", isAdmin: user.IsAdmin});
 
           // Close the connection
           connection.end();

@@ -35,8 +35,14 @@ export class LoginPageComponent {
         if (response) {
           console.log('Login successful');
 
+          // if the user is admin, navigate to the admin page
+          if (response.isAdmin) {
+            this.router.navigateByUrl('/admin');
+            return;
+          }else{
           // Navigate to the quiz select page
           this.router.navigateByUrl('/quiz-select');
+          }
         } else {
           console.log('Login failed:', response);
           // Show error message to user

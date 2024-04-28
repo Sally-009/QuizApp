@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 // import services
 import { FetchDataService } from '../../fetch-data.service';
 import { SubmitAnswerService } from '../../submit-answer.service';
+import { ScoreService } from '../../score.service';
 
 @Component({
   selector: 'app-quiz-page',
@@ -19,6 +20,7 @@ export class QuizPageComponent {
     private fetchDataService: FetchDataService,
     private submitAnswerService: SubmitAnswerService,
     private router: Router,
+    private scoreService: ScoreService
   ) {}
 
   // static variable to store question data (from quiz-list.component.ts)
@@ -32,7 +34,6 @@ export class QuizPageComponent {
 
   // variables for user answer and audit
   today: Date = new Date();
-  score: number = 0;
   userChoice: string = '';
   isCorrect: Boolean = false;
 
@@ -51,6 +52,8 @@ export class QuizPageComponent {
     this.questionImages = QuizPageComponent.questions.map(
       (question: { QuestionImageURL: any }) => question.QuestionImageURL
     );
+
+    this.scoreService.resetScore();
 
     // get choices
     this.getChoices();
@@ -75,7 +78,7 @@ export class QuizPageComponent {
 
           // Update score if the answer is correct
           if (this.isCorrect) {
-            this.score = this.submitAnswerService.updateScore(this.score, 1);
+            this.scoreService.addScore(1);
           }
 
           // Increment the current question number
@@ -86,7 +89,7 @@ export class QuizPageComponent {
 
           // Check if the quiz is finished
           if (this.currentQuestionNumber === this.totalQuestionNumber) {
-            console.log('Quiz finished! Final Score:', this.score);
+            console.log('Quiz finished! Final Score:', this.scoreService.getScore());
             // Navigate to the results page
             this.router.navigateByUrl('/result');
           } else {
