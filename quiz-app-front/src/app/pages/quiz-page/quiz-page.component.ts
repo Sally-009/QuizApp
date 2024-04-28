@@ -4,9 +4,9 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 
 // import services
-import { FetchDataService } from '../../fetch-data.service';
-import { SubmitAnswerService } from '../../submit-answer.service';
-import { ScoreService } from '../../score.service';
+import { FetchDataService } from '../services/fetch-data.service';
+import { SubmitAnswerService } from '../services/submit-answer.service';
+import { ScoreService } from '../services/score.service';
 
 @Component({
   selector: 'app-quiz-page',
@@ -30,7 +30,7 @@ export class QuizPageComponent {
   questionIDs: number[] = [];
   quizQuestions: string[] = [];
   questionImages: string[] = []; // Add http://localhost:3000/ to the beginning of the URL
-  quizChoices: string[][] = [];
+  quizChoices: string[] = [];
 
   // variables for user answer and audit
   today: Date = new Date();

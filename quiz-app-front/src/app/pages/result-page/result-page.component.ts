@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ScoreService } from '../../score.service';
+import { ScoreService } from '../services/score.service';
 
 @Component({
   selector: 'app-result-page',

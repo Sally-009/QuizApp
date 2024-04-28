@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FetchDataService } from '../../fetch-data.service';
+import { FetchDataService } from '../../pages/services/fetch-data.service';
 import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
