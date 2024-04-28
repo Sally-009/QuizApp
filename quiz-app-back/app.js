@@ -13,6 +13,7 @@ var questionsRouter = require('./routes/questions');
 var choicesRouter = require('./routes/choices');
 var loginRouter = require('./routes/login');
 var validateRouter = require('./routes/validate');
+var auditRouter = require('./routes/audit');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/questions', questionsRouter);
 app.use('/choices', choicesRouter);
 app.use("/login", loginRouter); 
 app.use("/validate", validateRouter);
+app.use("/audit", auditRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

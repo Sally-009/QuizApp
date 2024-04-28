@@ -3,14 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { SHA256 } from 'crypto-js';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string){
-
+  login(email: string, password: string) {
     // Hash the password
     const hashedPassword = SHA256(password).toString();
     // set user data
@@ -19,5 +17,4 @@ export class LoginService {
     // send a post request to the server
     return this.http.post<any>('http://localhost:3000/login', userData);
   }
-
 }

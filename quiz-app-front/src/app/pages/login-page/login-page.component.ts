@@ -33,8 +33,9 @@ export class LoginPageComponent {
       (response) => {
         console.log('Login response:', response);
         if (response) {
-          // Navigate to the quiz select page
           console.log('Login successful');
+
+          // Navigate to the quiz select page
           this.router.navigateByUrl('/quiz-select');
         } else {
           console.log('Login failed:', response);

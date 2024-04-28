@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
 
   // Query the database to retrieve user information
   connection.query(
-    "SELECT Email, Password FROM users WHERE email = ?",
+    "SELECT UserID, Email, Password FROM users WHERE email = ?",
     [email],
     (err, results) => {
       if (err) {
@@ -37,20 +37,40 @@ router.post("/", (req, res) => {
         return res.status(400).json({ message: "User not found" });
       }
 
-      // User found, compare passwords
+      // User found,
       const user = results[0];
-      if (hashedPassword !== user.Password) {
-        return res.status(400).json({ message: "Incorrect password" });
-      }
 
-      // Passwords match, authentication successful
-      console.log("Login successful");
-      res.json({ message: "Login successful", user });
+      // audit log
+      const userID = user.UserID;
+      const today = new Date().toISOString().slice(0, 19).replace("T", " "); // format date
+      // Add to audit log
+      connection.query(
+        "INSERT INTO loginlog (UserID,DateAttempted) VALUES (?, ?)",
+        [userID, today],
+        (err, results) => {
+          if (err) {
+            console.error("Error querying audit table:", err);
+            return res.status(500).json({ message: "Internal server error" });
+          }
+
+          // show the result
+          console.log("Audit Query results:", results);
+
+          // compare passwords
+          if (hashedPassword !== user.Password) {
+            return res.status(400).json({ message: "Incorrect password" });
+          }
+
+          // Passwords match, authentication successful
+          console.log("Login successful");
+          res.json({ message: "Login successful", user });
+
+          // Close the connection
+          connection.end();
+        }
+      );
     }
   );
-
-  // Close the connection
-  connection.end();
 });
 
 module.exports = router;
