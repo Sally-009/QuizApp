@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
+import { Router } from '@angular/router';
 
 // import services
 import { FetchDataService } from '../../fetch-data.service';
@@ -9,14 +10,15 @@ import { SubmitAnswerService } from '../../submit-answer.service';
 @Component({
   selector: 'app-quiz-page',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgFor],
   templateUrl: './quiz-page.component.html',
   styleUrl: './quiz-page.component.css',
 })
 export class QuizPageComponent {
   constructor(
     private fetchDataService: FetchDataService,
-    private submitAnswerService: SubmitAnswerService
+    private submitAnswerService: SubmitAnswerService,
+    private router: Router,
   ) {}
 
   // static variable to store question data (from quiz-list.component.ts)
@@ -51,6 +53,54 @@ export class QuizPageComponent {
     );
 
     // get choices
+    this.getChoices();
+
+    this.totalQuestionNumber = this.quizQuestions.length;
+
+    console.log('Question IDs:', this.questionIDs);
+    console.log('Questions:', this.quizQuestions);
+    console.log('Images:', this.questionImages);
+    console.log('Total Questions:', this.totalQuestionNumber);
+    console.log('Today:', this.today);
+  }
+
+  // Post user answer to the server and validate the answer
+  onClickSubmit() {
+    // Post user answer to the server and validate
+    this.submitAnswerService
+      .sendAnswer(this.questionIDs[this.currentQuestionNumber], this.userChoice)
+      .subscribe(
+        (isCorrect: boolean) => {
+          this.isCorrect = isCorrect;
+
+          // Update score if the answer is correct
+          if (this.isCorrect) {
+            this.score = this.submitAnswerService.updateScore(this.score, 1);
+          }
+
+          // Increment the current question number
+          this.currentQuestionNumber += 1;
+
+          // Reset user choice
+          this.userChoice = '';
+
+          // Check if the quiz is finished
+          if (this.currentQuestionNumber === this.totalQuestionNumber) {
+            console.log('Quiz finished! Final Score:', this.score);
+            // Navigate to the results page
+            this.router.navigateByUrl('/result');
+          } else {
+            // Get choices for the next question
+            this.getChoices();
+          }
+        },
+        (error) => {
+          console.error('Error checking answer: ', error);
+        }
+      );
+  }
+
+  getChoices(){
     this.fetchDataService
       .getAnswers(this.questionIDs[this.currentQuestionNumber])
       .subscribe(
@@ -64,38 +114,5 @@ export class QuizPageComponent {
           console.error('Error fetching answers: ', error);
         }
       );
-
-    this.totalQuestionNumber = this.quizQuestions.length;
-
-    console.log('Question IDs:', this.questionIDs);
-    console.log('Questions:', this.quizQuestions);
-    console.log('Images:', this.questionImages);
-    console.log('Total Questions:', this.totalQuestionNumber);
-    console.log('Today:', this.today);
-  }
-
-  // Post user answer to the server and validate the answer
-  onClickSubmit() {
-    // Post user answer to the server
-
-    this.isCorrect = this.submitAnswerService.sendAnswer(
-      this.questionIDs[this.currentQuestionNumber],
-      this.userChoice
-    );
-
-    if (this.isCorrect) {
-      this.score = this.submitAnswerService.updateScore(this.score, 1);
-    }
-    // Check if the quiz is finished
-    if (this.currentQuestionNumber === this.totalQuestionNumber) {
-      console.log('Quiz finished');
-      // Navigate to the results page
-    }
-
-    // Increment the current question number
-    this.currentQuestionNumber += 1;
-
-    // Reset user choice
-    this.userChoice = '';
   }
 }
