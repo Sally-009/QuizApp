@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 // services
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 
 // components
 import { RegisterButtonComponent } from '../../components/register-button/register-button.component';

@@ -63,7 +63,7 @@ router.post("/", (req, res) => {
         
           // Passwords match, authentication successful
           console.log("Login successful");
-          res.json({ message: "Login successful", isAdmin: user.IsAdmin});
+          res.json({ message: "Login successful", userID: user.UserID, isAdmin: user.IsAdmin});
 
           // Close the connection
           connection.end();

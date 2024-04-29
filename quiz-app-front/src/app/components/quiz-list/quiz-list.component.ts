@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FetchDataService } from '../../pages/services/fetch-data.service';
+import { FetchDataService } from '../../services/fetch-data.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
+import { QuizLogService } from '../../services/quiz-log.service';
 
 // component
 import { QuizPageComponent } from '../../pages/quiz-page/quiz-page.component';
@@ -17,7 +18,8 @@ export class QuizListComponent {
   // constructor to inject the FetchDataService
   constructor(
     private fetchDataService: FetchDataService,
-    private router: Router
+    private router: Router,
+    private quizLogService: QuizLogService,
   ) {}
 
   // define a variable to store the quizzes
@@ -40,6 +42,8 @@ export class QuizListComponent {
     this.fetchDataService.getQuestions(quizId).subscribe(
       (data: any) => {
         QuizPageComponent.questions = data; // store the questions in the static variable
+        // Set Quiz ID for the quiz log
+        this.quizLogService.setQuizID(quizId);
         // navigate to the quiz page
         this.router.navigateByUrl('/quiz');
       },

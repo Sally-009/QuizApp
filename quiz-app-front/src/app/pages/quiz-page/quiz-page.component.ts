@@ -4,10 +4,11 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 
 // import services
-import { FetchDataService } from '../services/fetch-data.service';
-import { SubmitAnswerService } from '../services/submit-answer.service';
-import { ScoreService } from '../services/score.service';
-
+import { FetchDataService } from '../../services/fetch-data.service';
+import { SubmitAnswerService } from '../../services/submit-answer.service';
+import { ScoreService } from '../../services/score.service';
+import { QuizLogService } from '../../services/quiz-log.service';
+import { LoginService } from '../../services/login.service';
 @Component({
   selector: 'app-quiz-page',
   standalone: true,
@@ -20,7 +21,9 @@ export class QuizPageComponent {
     private fetchDataService: FetchDataService,
     private submitAnswerService: SubmitAnswerService,
     private router: Router,
-    private scoreService: ScoreService
+    private scoreService: ScoreService,
+    private quizLogService: QuizLogService,
+    private loginService: LoginService,
   ) {}
 
   // static variable to store question data (from quiz-list.component.ts)
@@ -54,6 +57,15 @@ export class QuizPageComponent {
     );
 
     this.scoreService.resetScore();
+
+    // Log userID and quiz date
+    const userID = this.loginService.getUserID();
+    this.quizLogService.setUserID(userID);
+    this.quizLogService.setDateTaken(this.today.toISOString());
+
+    console.log('User ID:', userID);
+    console.log('Date:', this.today);
+    console.log('Quiz ID:', this.quizLogService.getQuizID());
 
     // get choices
     this.getChoices();
@@ -90,6 +102,19 @@ export class QuizPageComponent {
           // Check if the quiz is finished
           if (this.currentQuestionNumber === this.totalQuestionNumber) {
             console.log('Quiz finished! Final Score:', this.scoreService.getScore());
+            // Store the final score
+            this.quizLogService.setScore(this.scoreService.getScore());
+
+            // Post the quiz log to the server
+            this.quizLogService.sendQuizLog().subscribe(
+              (response) => {
+                console.log('Quiz log response:', response);
+              },
+              (error) => {
+                console.error('Error posting quiz log:', error);
+              }
+            );
+
             // Navigate to the results page
             this.router.navigateByUrl('/result');
           } else {
@@ -119,3 +144,13 @@ export class QuizPageComponent {
       );
   }
 }
+
+
+/*
+console.log(event.toString());
+// Expected output: "Wed Jul 28 1993 14:39:07 GMT+0200 (CEST)"
+// Note: your timezone may vary
+
+console.log(event.toDateString());
+// Expected output: "Wed Jul 28 1993"
+*/
