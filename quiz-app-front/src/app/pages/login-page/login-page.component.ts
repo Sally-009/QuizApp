@@ -34,6 +34,8 @@ export class LoginPageComponent {
         console.log('Login response:', response);
         if (response) {
           console.log('Login successful');
+          // Store user ID
+          this.loginService.setUserID(response.userID);
 
           // if the user is admin, navigate to the admin page
           if (response.isAdmin) {

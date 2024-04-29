@@ -17,10 +17,9 @@ router.get('/', function(req, res, next) {
 
   /// query users table
   connection.query(
-    'SELECT * FROM users',
-    function(err, rows, fields) {
-      if (!err)
-      console.log("\nSuccessfully queried users table!\n");
+    "SELECT * FROM UsersWithLastLoginDate",
+    function (err, rows, fields) {
+      if (!err) console.log("\nSuccessfully queried users table!\n");
       res.send(rows); // send the result (JSON format)
     }
   );

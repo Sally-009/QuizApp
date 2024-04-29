@@ -8,6 +8,8 @@ import { SHA256 } from 'crypto-js';
 export class LoginService {
   constructor(private http: HttpClient) {}
 
+  userID: number = 0;
+
   login(email: string, password: string) {
     // Hash the password
     const hashedPassword = SHA256(password).toString();
@@ -16,5 +18,13 @@ export class LoginService {
 
     // send a post request to the server
     return this.http.post<any>('http://localhost:3000/login', userData);
+  }
+
+  setUserID(id: number) {
+    this.userID = id;
+  }
+
+  getUserID(): number {
+    return this.userID;
   }
 }

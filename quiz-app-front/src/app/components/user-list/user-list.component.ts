@@ -17,6 +17,7 @@ export class UserListComponent {
   users: any[] = [];
 
   ngOnInit() {
+    // fetch the users
     this.fetchDataService.getUsers().subscribe(
       (data: any[]) => {
         this.users = data;

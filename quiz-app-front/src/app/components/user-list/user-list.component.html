@@ -1,5 +1,4 @@
 <div class="user-list">
-  <h2>User List</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -7,6 +6,7 @@
         <th>Email</th>
         <th>Password</th>
         <th>Is Admin</th>
+        <th>Last Login Attempted</th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +15,12 @@
         <td>{{ user.Email }}</td>
         <td>{{ user.Password }}</td>
         <td>{{ user.IsAdmin }}</td>
+        <ng-container *ngIf="user.LastLoginDate">
+          <td>{{ user.LastLoginDate | date: 'MM/dd/yyyy' }}</td>
+        </ng-container>
+        <ng-container *ngIf="!user.LastLoginDate">
+          <td>N/A</td>
+        </ng-container>
       </tr>
     </tbody>
   </table>
