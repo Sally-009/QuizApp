@@ -12,6 +12,7 @@ export class FetchDataService {
   private questionsURL = 'http://localhost:3000/questions';
   private answersURL = 'http://localhost:3000/choices';
   private lastLoginURL = 'http://localhost:3000/lastLogin';
+  private quizLogURL = 'http://localhost:3000/quizLog';
 
   // constructor
   constructor(private http: HttpClient) {}
@@ -37,5 +38,9 @@ export class FetchDataService {
 
   getLastLogin(userID: number): Observable<any> {
     return this.http.get(`${this.lastLoginURL}/${userID}`);
+  }
+
+  getQuizLog(userID: number): Observable<any> {
+    return this.http.get(`${this.quizLogURL}/${userID}`);
   }
 }

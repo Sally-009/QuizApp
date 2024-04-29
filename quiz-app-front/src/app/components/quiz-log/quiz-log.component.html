@@ -1,0 +1,14 @@
+<div class="quiz-log">
+  <table class="table table-bordered">
+    <tr>
+      <th>Quiz ID</th>
+      <th>Date Taken</th>
+      <th>Score</th>
+    </tr>
+    <tr *ngFor="let quizLog of quizLogs">
+      <td>{{ quizLog.QuizID }}</td>
+      <td>{{ quizLog.DateTaken | date: 'MM/dd/yyyy' }}</td>
+      <td>{{ quizLog.Score }}</td>
+    </tr>
+  </table>
+</div>
