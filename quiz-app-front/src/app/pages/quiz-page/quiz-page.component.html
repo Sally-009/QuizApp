@@ -7,9 +7,8 @@
 
 <!-- Choices -->
 <div class="choice-component" *ngFor="let choice of quizChoices">
-  <input type="radio" name="choice" [value]="choice" [(ngModel)]="userChoice">
-  <label for="choice">{{choice}}</label>
+  <input type="radio" id="{{choice}}" name="choice" [value]="choice" [(ngModel)]="userChoice">
+  <label for="{{choice}}">{{choice}}</label>
 </div>
 
-<br>
-<button type="submit" (click)="onClickSubmit()">Submit</button>
+<button class="btn btn-outline-success" type="submit" (click)="onClickSubmit()">Submit</button>
