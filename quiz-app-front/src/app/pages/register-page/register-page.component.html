@@ -1,1 +1,26 @@
-<p>register-page works!</p>
+<div class="register-page">
+  <h2>- Create New User -</h2>
+
+  <div class="error-message">
+    <p class="text-danger">{{ this.errorMsg }}</p>
+  </div>
+
+  <form>
+    <div class="form-group">
+
+      <label for="email">E-mail: </label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userDetails.email" />
+      <br>
+      <label for="password">Password: </label>
+      <input type="text" class="form-control" id="password" name="password" [(ngModel)]="userDetails.password" />
+
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-primary" (click)="onClickRegister()">Register</button>
+  </form>
+
+  <br>
+
+</div>

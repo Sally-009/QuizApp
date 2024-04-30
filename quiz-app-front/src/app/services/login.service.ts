@@ -14,7 +14,7 @@ export class LoginService {
     // Hash the password
     const hashedPassword = SHA256(password).toString();
     // set user data
-    const userData = { email, hashedPassword };
+    const userData = { Email: email, Password: hashedPassword };
 
     // send a post request to the server
     return this.http.post<any>('http://localhost:3000/login', userData);

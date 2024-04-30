@@ -5,11 +5,11 @@ const router = express.Router();
 const mysql = require("mysql2");
 
 router.post("/", (req, res) => {
-  const { email, hashedPassword } = req.body; // Get email and hashedPassword from request body
+  const { Email, Password } = req.body; // Get email and hashedPassword from request body
 
   console.log("POST Data:", req.body);
-  console.log("Email:", email);
-  console.log("Hashed Password:", hashedPassword);
+  console.log("Email:", Email);
+  console.log("Hashed Password:", Password);
 
   // Connect to the database
   const connection = mysql.createConnection({
@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
   // Query the database to retrieve user information
   connection.query(
     "SELECT UserID, Email, Password, IsAdmin FROM users WHERE email = ?",
-    [email],
+    [Email],
     (err, results) => {
       if (err) {
         console.error("Error querying users table:", err);
@@ -57,13 +57,17 @@ router.post("/", (req, res) => {
           console.log("Audit Query results:", results);
 
           // compare passwords
-          if (hashedPassword !== user.Password) {
+          if (Password !== user.Password) {
             return res.status(400).json({ message: "Incorrect password" });
           }
-        
+
           // Passwords match, authentication successful
           console.log("Login successful");
-          res.json({ message: "Login successful", userID: user.UserID, isAdmin: user.IsAdmin});
+          res.json({
+            message: "Login successful",
+            userID: user.UserID,
+            isAdmin: user.IsAdmin,
+          });
 
           // Close the connection
           connection.end();

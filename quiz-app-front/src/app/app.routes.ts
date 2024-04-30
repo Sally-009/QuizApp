@@ -6,6 +6,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { QuizSelectPageComponent } from './pages/quiz-select-page/quiz-select-page.component';
 import { QuizPageComponent } from './pages/quiz-page/quiz-page.component';
 import { ResultPageComponent } from './pages/result-page/result-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Top page
@@ -14,4 +15,5 @@ export const routes: Routes = [
   { path: 'quiz-select', component: QuizSelectPageComponent },
   { path: 'quiz', component: QuizPageComponent },
   { path: 'result', component: ResultPageComponent },
+  { path: 'register', component: RegisterPageComponent},
 ];
