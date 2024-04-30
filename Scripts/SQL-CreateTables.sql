@@ -236,3 +236,47 @@ SELECT * FROM QuizContent WHERE quizID=2;
 SELECT * FROM QuizContent WHERE quizID=3;
 
 show databases;
+
+SELECT QuestionText, AnswerText, QuestionImageURL FROM Questions q LEFT JOIN Answers a on q.questionID=a.questionID WHERE quizid = 1;
+
+SELECT q.quizID, q.QuestionText, 
+    GROUP_CONCAT(COALESCE(a.AnswerText, 'NULL') ORDER BY a.AnswerID) AS Choices, 
+    GROUP_CONCAT(COALESCE(a.IsCorrect, 'NULL') ORDER BY a.AnswerID) AS Correctness
+FROM Questions q
+LEFT JOIN Answers a ON q.QuestionID = a.QuestionID
+GROUP BY q.questionID, q.QuestionText;
+
+
+CREATE OR REPLACE VIEW UsersWithLastLoginDate as
+SELECT u.*, l.LastLoginDate
+FROM users u
+left JOIN (
+    SELECT userID, MAX(DateAttempted) AS LastLoginDate
+    FROM loginlog
+    GROUP BY userID
+) l ON u.userID = l.userID;
+
+select * from UsersWithLastLoginDate;
+
+
+DELIMITER //
+
+CREATE TRIGGER deleteUserQuizLogTrigger
+before DELETE ON Users
+FOR EACH ROW
+BEGIN
+    DELETE FROM UserQuizLog WHERE UserID = OLD.UserID;
+END//
+
+
+CREATE TRIGGER deleteUserLoginLogTrigger
+BEFORE DELETE ON Users
+FOR EACH ROW
+BEGIN
+    DELETE FROM LoginLog WHERE UserID = OLD.UserID;
+END//
+
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS deleteUserLoginLogTrigger;
