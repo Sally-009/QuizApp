@@ -60,6 +60,41 @@ router.post('/', function(req, res, next) {
   );
 });
 
+// Delete a user
+router.delete('/:userID', function(req, res, next) {
+
+  // connect to the database
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", // hostname for the database
+    user: "root", // username
+    password: "skojima", // password
+    database: "QuizApp", // database name
+  });
+
+  // get the userID from the URL
+  const userID = parseInt(req.params.userID);
+
+  // delete a user
+  connection.query(
+    `DELETE FROM Users WHERE UserID = ${userID}`,
+    function (err, rows, fields) {
+      if (err) {
+        console.error("\nError deleting a user:", err);
+        // send error message
+        res.status(500).send({ message: "Internal server error" });
+      } else {
+        console.log("\nSuccessfully deleted a user!\n");
+        // send success message
+        res.status(200).send({ message: "Successfully deleted a user!" });
+      }
+    }
+  );
+
+  // close the connection
+  connection.end();
+
+});
+
 module.exports = router;
 
 

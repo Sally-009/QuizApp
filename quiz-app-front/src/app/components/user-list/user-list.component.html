@@ -7,6 +7,7 @@
         <th>Password</th>
         <th>Is Admin</th>
         <th>Last Login Attempted</th>
+        <th>Delete User</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,8 @@
         <ng-container *ngIf="!user.LastLoginDate">
           <td>N/A</td>
         </ng-container>
+        <td>
+          <button class="btn btn-danger" (click)="deleteUser(user.UserID)">Delete</button>
       </tr>
     </tbody>
   </table>

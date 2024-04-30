@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FetchDataService } from '../../services/fetch-data.service';
+import { DeleteUserService } from '../../services/delete-user.service';
 import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
@@ -11,7 +12,10 @@ import { CommonModule, NgFor } from '@angular/common';
 })
 export class UserListComponent {
   // constructor to inject the FetchDataService
-  constructor(private fetchDataService: FetchDataService) {}
+  constructor(
+    private fetchDataService: FetchDataService
+    , private deleteUserService: DeleteUserService,
+  ) {}
 
   // fetch the users from the service
   users: any[] = [];
@@ -24,6 +28,22 @@ export class UserListComponent {
       },
       (error) => {
         console.error('Error fetching users: ', error);
+      }
+    );
+  }
+
+  // delete user
+  deleteUser(userID: string) {
+    // send DELETE request to delete user
+    this.deleteUserService.deleteUser(userID).subscribe(
+      (data: any) => {
+        console.log('User deleted: ', data);
+
+        // remove the user from the list
+        this.users = this.users.filter((user) => user._id !== userID);
+      },
+      (error) => {
+        console.error('Error deleting user: ', error);
       }
     );
   }
