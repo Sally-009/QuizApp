@@ -23,7 +23,10 @@
           <td>N/A</td>
         </ng-container>
         <td>
+        <ng-container *ngIf="user.IsAdmin !== 1">
           <button class="btn btn-danger" (click)="deleteUser(user.UserID)">Delete</button>
+        </ng-container>
+      </td>
       </tr>
     </tbody>
   </table>
